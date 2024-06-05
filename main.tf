@@ -150,7 +150,7 @@ resource "aws_codebuild_project" "revhire-job-build" {
     }
     environment_variable {
       name  = "EKS_CLUSTERNAME"
-      value = "revhire-cluster-new"
+      value = "revhire-cluster-new-final"
     }
 
     environment_variable {
