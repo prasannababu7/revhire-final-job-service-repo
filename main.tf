@@ -3,12 +3,12 @@ provider "aws" {
 }
 
 resource "aws_codecommit_repository" "revhire-job-repository" {
-  repository_name = "revhire-job-repository-auto"
+  repository_name = "revhire-job-repository-auto-final"
   description     = "A revhire job-repository on AWS CodeCommit"
 }
 
 resource "aws_iam_role" "codebuild_role" {
-  name = "codebuild-service-role-for-job-auto"
+  name = "codebuild-service-role-for-job-auto-final"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -27,7 +27,7 @@ data "aws_codecommit_repository" "revhire-job-repository" {
 }
 
 resource "aws_iam_role_policy" "codebuild_policy" {
-  name = "codebuild-policy-auto"
+  name = "codebuild-policy-auto-final"
   role = aws_iam_role.codebuild_role.id
 
   policy = jsonencode({
@@ -120,9 +120,9 @@ resource "aws_iam_role_policy_attachment" "codebuild_codepipeline_custom_action_
   policy_arn = "arn:aws:iam::aws:policy/AWSCodePipelineCustomActionAccess"
 }
 
-resource "aws_iam_role_policy_attachment" "codebuild_ssm_automation_role" {
+resource "aws_iam_role_policy_attachment" "codebuild_ssm_auto-finalmation_role" {
   role       = aws_iam_role.codebuild_role.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonSSMAutomationRole"
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonSSMAuto-finalmationRole"
 }
 
 resource "aws_iam_role_policy_attachment" "codebuild_ssm_full_access" {
@@ -131,7 +131,7 @@ resource "aws_iam_role_policy_attachment" "codebuild_ssm_full_access" {
 }
 
 resource "aws_codebuild_project" "revhire-job-build" {
-  name          = "revhire-job-build-auto"
+  name          = "revhire-job-build-auto-final"
   description   = "Build project for revhire-job application"
   service_role  = aws_iam_role.codebuild_role.arn
 
@@ -179,7 +179,7 @@ resource "aws_codebuild_project" "revhire-job-build" {
 }
 
 resource "aws_iam_role" "codepipeline_role" {
-  name = "codepipeline-service-role-auto"
+  name = "codepipeline-service-role-auto-final"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -194,7 +194,7 @@ resource "aws_iam_role" "codepipeline_role" {
 }
 
 resource "aws_iam_role_policy" "codepipeline_policy" {
-  name = "codepipeline-policy-auto"
+  name = "codepipeline-policy-auto-final"
   role = aws_iam_role.codepipeline_role.id
 
   policy = jsonencode({
@@ -236,7 +236,7 @@ resource "aws_iam_role_policy_attachment" "codepipeline_codebuild_developeracces
 }
 
 resource "aws_s3_bucket" "codepipeline_bucket" {
-  bucket = "revhire-job-codepipeline-artifacts-auto-final"
+  bucket = "revhire-job-codepipeline-artifacts-auto-final-final"
   force_destroy = true
 }
 
@@ -262,7 +262,7 @@ resource "aws_s3_bucket_policy" "codepipeline_bucket_policy" {
 }
 
 resource "aws_codepipeline" "revhire_job_pipeline" {
-  name     = "revhire-job-pipeline-auto"
+  name     = "revhire-job-pipeline-auto-final"
   role_arn = aws_iam_role.codepipeline_role.arn
 
   artifact_store {
